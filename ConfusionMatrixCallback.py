@@ -8,13 +8,18 @@ from pytorch_lightning.callbacks import Callback
 from torchmetrics import ConfusionMatrix
 
 class ConfusionMatrixCallback(Callback):
-    ''' This callback is designed to plot a confusion matrix every n_epochs at the end of the train/validation/test epoch. It requires
-    the lines:
+    ''' 
+    Callback to plot a confusion matrix every n_epochs at the end of the train/validation/test epoch. 
+    By default it plots a confusion matrix after every 10th validation epoch.
+
+    To setup the callback it requires the lines:
+    
     self.confusion_matrix =  ConfusionMatrix(num_classes = n)
-    self.cf_matrix = torch.zeros(n, n)
-    to be in the models init and the line:
+    self.cf_matrix = torch.zeros(n, n) #(where n is the number of classes)
+    
+    to be in the model's init and the following line in your step definition eg train step:
     self.cf_matrix += self.confusion_matrix(torch.argmax(F.softmax(logits), dim = 1), labels) 
-    ### Note, in your step definition eg train step the callback assumes you have:
+    Note,  the callback assumes you have:
     data, labels = train_batch
     If you have something else as your target eg:
     data, target = train_batch
@@ -23,17 +28,23 @@ class ConfusionMatrixCallback(Callback):
     must be changed to:
     self.cf_matrix += self.confusion_matrix(torch.argmax(F.softmax(logits), dim = 1), target) 
 
-
-
-    to be in each place you'd like a confusion matrix plotted. 
     
     The arguments train, val and test are booleans to allow the user to decide after which epochs a confusion matrix is plotted.
-    The argument division takes a boolean to decide if the matrix must be divided by its sum 
-    (to show percentages) or not (if set to True the division will occur).
-    The optional argument title allows the user to set a main title for all the plots.
-    The optional argument labels allows the user to input the categorical names in order to improve the plots.
+    train (bool, default = False)                   If set to True a confusion matrix will be plotted after every n_epochs training epochs
+
+    val (bool, default = True)                      If set to True a confusion matrix will be plotted after every n_epochs validation epochs
+
+    test (bool, default = False)                    If set to True a confusion matrix will be plotted after every n_epochs testing epochs
+
+    division (bool, default = False)                If set to True the plotted confusion matrix will be divided by its sum, resulting in percentages
+                                                    instead of counts appearing in the plot
+
+    title (str, default = None)                     Allows the user to set a main title for all the plots
+    
+    labels (list of strings, default = None)        Allows the user to input the category names in order to labels the x and y axes of the plots.
+    
     '''
-    def __init__(self, train = True, val = False, test = False, division = False, n_epochs = 10, title = None, labels = None):
+    def __init__(self, train = False, val = True, test = False, division = False, n_epochs = 10, title = None, labels = None):
         self.division = division
         self.n_epochs = n_epochs
         self.title = title
