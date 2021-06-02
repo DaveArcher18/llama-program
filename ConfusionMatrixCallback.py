@@ -41,7 +41,7 @@ class ConfusionMatrixCallback(Callback):
         self.val = val
         self.test = test
     
-    def _plot_confusion_matrix(self, cf_matrix, division, step_title, labels = None):
+    def _plot_confusion_matrix(self, cf_matrix, step_title, labels = None):
         '''This funtion plots the confusion matrix in accordance with the above arguments '''
         
         cf_matrix = cf_matrix.cpu().numpy()
@@ -59,7 +59,7 @@ class ConfusionMatrixCallback(Callback):
             ax.set_xticklabels(labels)
             ax.set_yticklabels(labels)
             
-        if division:
+        if self.division:
             sns.heatmap(cf_matrix/np.sum(cf_matrix), annot=True, 
             fmt='.2%', cmap='Blues', ax = ax)
             
