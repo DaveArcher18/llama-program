@@ -21,9 +21,9 @@ class ConfusionMatrixCallback(Callback):
         self.test_cm =  ConfusionMatrix(num_classes = n) #for plotting after testing epochs
 
     In each step definition (train/val/test) the folowing must be present (target is your target):
-    self.train_cm(torch.argmax(F.softmax(logits), dim = 1), target) #for plotting after training epochs
-    self.val_cm(torch.argmax(F.softmax(logits), dim = 1), target) #for plotting after validation epochs
-    self.test_cm(torch.argmax(F.softmax(logits), dim = 1), target) #for plotting after testing epochs
+        self.train_cm(torch.argmax(F.softmax(logits), dim = 1), target) #for plotting after training epochs
+        self.val_cm(torch.argmax(F.softmax(logits), dim = 1), target) #for plotting after validation epochs
+        self.test_cm(torch.argmax(F.softmax(logits), dim = 1), target) #for plotting after testing epochs
     
     Arguments:
     train (bool, default = False)                   If set to True a confusion matrix will be plotted after every n_epochs training epochs
