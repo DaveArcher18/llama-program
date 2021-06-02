@@ -12,24 +12,20 @@ class ConfusionMatrixCallback(Callback):
     Callback to plot a confusion matrix every n_epochs at the end of the train/validation/test epoch. 
     By default it plots a confusion matrix after every 10th validation epoch.
 
-    To setup the callback it requires the lines:
-    
-    self.confusion_matrix =  ConfusionMatrix(num_classes = n)
-    self.cf_matrix = torch.zeros(n, n) #(where n is the number of classes)
-    
-    to be in the model's init and the following line in your step definition eg train step:
-    self.cf_matrix += self.confusion_matrix(torch.argmax(F.softmax(logits), dim = 1), labels) 
-    Note,  the callback assumes you have:
-    data, labels = train_batch
-    If you have something else as your target eg:
-    data, target = train_batch
-    then:
-    self.cf_matrix += self.confusion_matrix(torch.argmax(F.softmax(logits), dim = 1), labels) 
-    must be changed to:
-    self.cf_matrix += self.confusion_matrix(torch.argmax(F.softmax(logits), dim = 1), target) 
+    To setup the callback:
+    The following import must be present:
+        from torchmetrics import ConfusionMatrix
+    For each step (train/val/test) the following must be present in the model's init (n is the number of classes):
+        self.train_cm =  ConfusionMatrix(num_classes = n) #for plotting after training epochs
+        self.val_cm =  ConfusionMatrix(num_classes = n) #for plotting after validation epochs
+        self.test_cm =  ConfusionMatrix(num_classes = n) #for plotting after testing epochs
 
+    In each step definition (train/val/test) the folowing must be present (target is your target):
+    self.train_cm(torch.argmax(F.softmax(logits), dim = 1), target) #for plotting after training epochs
+    self.val_cm(torch.argmax(F.softmax(logits), dim = 1), target) #for plotting after validation epochs
+    self.test_cm(torch.argmax(F.softmax(logits), dim = 1), target) #for plotting after testing epochs
     
-    The arguments train, val and test are booleans to allow the user to decide after which epochs a confusion matrix is plotted.
+    Arguments:
     train (bool, default = False)                   If set to True a confusion matrix will be plotted after every n_epochs training epochs
 
     val (bool, default = True)                      If set to True a confusion matrix will be plotted after every n_epochs validation epochs
@@ -86,29 +82,29 @@ class ConfusionMatrixCallback(Callback):
         
     def on_train_epoch_start(self, trainer, pl_module):
          if self.train and pl_module.current_epoch % self.n_epochs == 0:
-                pl_module.cf_matrix = torch.zeros_like(pl_module.cf_matrix)
+                pl_module.train_cm.reset()
        #zeros the confusion matrix so it can be repopulated by only this training epoch
     
     def on_train_epoch_end(self, trainer, pl_module, unused=None):
         if self.train and pl_module.current_epoch % self.n_epochs == 0:
-            self._plot_confusion_matrix(pl_module.cf_matrix, step_title = f'After Train epoch {pl_module.current_epoch}')
+            self._plot_confusion_matrix(pl_module.train_cm.compute(), step_title = f'After Train epoch {pl_module.current_epoch}')
     
     
     def on_validation_epoch_start(self, trainer, pl_module):
         if self.val and pl_module.current_epoch % self.n_epochs == 0 and pl_module.current_epoch != 0:
-                pl_module.cf_matrix = torch.zeros_like(pl_module.cf_matrix)
+                pl_module.val_cm.reset()
        #zeros the confusion matrix so it can be repopulated by only this validation epoch
         
     def on_validation_epoch_end(self, trainer, pl_module):
         if self.val and pl_module.current_epoch % self.n_epochs == 0 and pl_module.current_epoch != 0:
-            self._plot_confusion_matrix(pl_module.cf_matrix, step_title = f'After Validation epoch {pl_module.current_epoch}')
+            self._plot_confusion_matrix(pl_module.val_cm.compute(), step_title = f'After Validation epoch {pl_module.current_epoch}')
     
     
     def on_test_epoch_end(trainer, pl_module):
         if self.test and pl_module.current_epoch % self.n_epochs == 0:
-                pl_module.cf_matrix = torch.zeros_like(pl_module.cf_matrix)
+                pl_module.test_cm.reset()
        #zeros the confusion matrix so it can be repopulated by only this testing epoch
     
     def on_test_epoch_end(trainer, pl_module):
         if self.test and pl_module.current_epoch % self.n_epochs == 0:
-            self._plot_confusion_matrix(pl_module.cf_matrix, step_title = f'After Test epoch {pl_module.current_epoch}')
+            self._plot_confusion_matrix(pl_module.test_cm.compute(), step_title = f'After Test epoch {pl_module.current_epoch}')
