@@ -77,7 +77,7 @@ class ConfusionMatrixCallback(Callback):
     
     def on_train_epoch_end(self, trainer, pl_module, unused=None):
         if self.train and pl_module.current_epoch % self.n_epochs == 0:
-            self._plot_confusion_matrix(pl_module.cf_matrix, division = self.division, step_title = f'After Train epoch {pl_module.current_epoch}')
+            self._plot_confusion_matrix(pl_module.cf_matrix, step_title = f'After Train epoch {pl_module.current_epoch}')
     
     
     def on_validation_epoch_start(self, trainer, pl_module):
@@ -87,7 +87,7 @@ class ConfusionMatrixCallback(Callback):
         
     def on_validation_epoch_end(self, trainer, pl_module):
         if self.val and pl_module.current_epoch % self.n_epochs == 0 and pl_module.current_epoch != 0:
-            self._plot_confusion_matrix(pl_module.cf_matrix, division = self.division, step_title = f'After Validation epoch {pl_module.current_epoch}')
+            self._plot_confusion_matrix(pl_module.cf_matrix, step_title = f'After Validation epoch {pl_module.current_epoch}')
     
     
     def on_test_epoch_end(trainer, pl_module):
@@ -97,4 +97,4 @@ class ConfusionMatrixCallback(Callback):
     
     def on_test_epoch_end(trainer, pl_module):
         if self.test and pl_module.current_epoch % self.n_epochs == 0:
-            self._plot_confusion_matrix(pl_module.cf_matrix, division = self.division, step_title = f'After Test epoch {pl_module.current_epoch}')
+            self._plot_confusion_matrix(pl_module.cf_matrix, step_title = f'After Test epoch {pl_module.current_epoch}')
