@@ -33,15 +33,18 @@ class ConfusionMatrixCallback(Callback):
     The optional argument title allows the user to set a main title for all the plots.
     The optional argument labels allows the user to input the categorical names in order to improve the plots.
     '''
-    def __init__(self, train, val, test, division, n_epochs, title = None, labels = None):
+    def __init__(self, train = True, val = False, test = False, division = False, n_epochs = 10, title = None, labels = None):
         self.division = division
         self.n_epochs = n_epochs
         self.title = title
         self.train = train      
         self.val = val
         self.test = test
+        if labels:
+            self.labels = labels
+        
     
-    def _plot_confusion_matrix(self, cf_matrix, step_title, labels = None):
+    def _plot_confusion_matrix(self, cf_matrix, step_title):
         '''This funtion plots the confusion matrix in accordance with the above arguments '''
         
         cf_matrix = cf_matrix.cpu().numpy()
@@ -55,9 +58,9 @@ class ConfusionMatrixCallback(Callback):
         if self.title:
             ax.set_title(self.title)
             
-        if labels:
-            ax.set_xticklabels(labels)
-            ax.set_yticklabels(labels)
+        if self.labels:
+            ax.set_xticklabels(self.labels)
+            ax.set_yticklabels(self.labels)
             
         if self.division:
             sns.heatmap(cf_matrix/np.sum(cf_matrix), annot=True, 
