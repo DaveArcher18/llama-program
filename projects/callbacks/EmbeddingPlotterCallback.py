@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+import torch
 import plotly.express as px
 from pytorch_lightning.callbacks import Callback
 from torchmetrics import ConfusionMatrix
@@ -7,8 +8,45 @@ from sklearn.decomposition import PCA
 
 
 class EmbeddingPlotterCallback(Callback):
+    """
+    Callback to plot embeddings every n_epochs at the end of the train/validation/test epoch. 
+    By default it plots 2D and 3D after every 10th validation epoch.
+
+    To setup the callback: 
     
-    def __init__(self, train = True, val = False, test = False, dim_2 = True, dim_3 = True,  n_epochs = 1, title = None, labels = None):
+    The following imports must be present:
+        import numpy as np
+        import torch
+        from pytorch_lightning.callbacks import Callback
+        import plotly.express as px
+
+    The following must be present in the model's init (n is the dimension of the embeddings):
+        self.storage = torch.zeros(1, n + 1)
+
+    In each step definition (train/val/test) the folowing must be present after calculting the embeddings:
+        #labels is your target, embs is the tensor containing the embeddings
+        
+        new_storage = torch.cat((embs, torch.transpose(labels.unsqueeze(0), 0, 1)), 1)
+        self.storage = torch.cat((self.storage, new_storage), 0)
+
+    Arguments:
+    train (bool, default = False)                   If set to True embeddings will be plotted after every n_epochs training epochs
+
+    val (bool, default = True)                      If set to True embeddings will be plotted after every n_epochs validation epochs
+
+    test (bool, default = False)                    If set to True embeddings will be plotted after every n_epochs testing epochs
+
+    dim_2 (bool, default = True)                    If set to True 2 dimensional embeddings will be plotted every n_epochs after the chose steps
+    
+    dim_3 (bool, default = True)                    If set to True 3 dimensional embeddings will be plotted every n_epochs after the chose steps
+
+    n_epochs (int, default = 10)                    Plot will be produced every n_epochs
+
+    labels (list, default = None)                   Labels expects an ordered list of the class names (so the first entry corresponds to 
+                                                    the label 0, etc). If passed the plot will distunguish the embeddings by string label
+                                                    instead of by int label (makes the plot much better).
+    """ 
+    def __init__(self, train = False, val = True, test = False, dim_2 = True, dim_3 = True,  n_epochs = 10, labels = None):
         self.train = train      
         self.val = val
         self.test = test
