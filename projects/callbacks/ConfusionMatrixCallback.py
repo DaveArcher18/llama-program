@@ -31,15 +31,18 @@ class ConfusionMatrixCallback(Callback):
         self.val_cm(torch.argmax(F.softmax(logits), dim = 1), target) #for plotting after validation epochs
         self.test_cm(torch.argmax(F.softmax(logits), dim = 1), target) #for plotting after testing epochs
     
-    Arguments:
+    
+Arguments:
     train (bool, default = False)                   If set to True a confusion matrix will be plotted after every n_epochs training epochs
 
     val (bool, default = True)                      If set to True a confusion matrix will be plotted after every n_epochs validation epochs
 
     test (bool, default = False)                    If set to True a confusion matrix will be plotted after every n_epochs testing epochs
-
+    
     division (bool, default = False)                If set to True the plotted confusion matrix will be divided by its sum, resulting in percentages
                                                     instead of counts appearing in the plot
+
+    n_epochs (int, default = 10)                    A plot will be produced every n_epochs
 
     title (str, default = None)                     Allows the user to set a main title for all the plots
     
