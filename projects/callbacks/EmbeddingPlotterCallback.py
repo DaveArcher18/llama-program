@@ -20,7 +20,7 @@ class EmbeddingPlotterCallback(Callback):
         import plotly.express as px
 
     The following must be present in the model's init (n is the dimension of the embeddings):
-        self.storage = torch.zeros(1, n + 1)
+        self.storage = torch.zeros(1, n + 1).to(device = dev) #where dev is the device the training is being done on
 
     In each step definition (train/val/test) the folowing must be present after calculting the embeddings:
         #labels is your target, embs is the tensor containing the embeddings
