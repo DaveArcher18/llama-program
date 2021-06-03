@@ -14,7 +14,13 @@ class ConfusionMatrixCallback(Callback):
 
     To setup the callback:
     The following import must be present:
+        import numpy as np
+        import torch
+        import matplotlib.pyplot as plt
+        import seaborn as sns
+        from pytorch_lightning.callbacks import Callback
         from torchmetrics import ConfusionMatrix
+
     For each step (train/val/test) the following must be present in the model's init (n is the number of classes):
         self.train_cm =  ConfusionMatrix(num_classes = n) #for plotting after training epochs
         self.val_cm =  ConfusionMatrix(num_classes = n) #for plotting after validation epochs
