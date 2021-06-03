@@ -3,7 +3,6 @@ import numpy as np
 import torch
 import plotly.express as px
 from pytorch_lightning.callbacks import Callback
-from torchmetrics import ConfusionMatrix
 from sklearn.decomposition import PCA
 
 
@@ -54,7 +53,6 @@ class EmbeddingPlotterCallback(Callback):
         self.dim_3 = dim_3
         self.n_epochs = n_epochs
         self.labels = labels
-        self.title = title
         
         
     def _plot_embeddings(self, storage, step_title):
