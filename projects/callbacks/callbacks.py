@@ -17,13 +17,6 @@ class ConfusionMatrixCallback(Callback):
     By default it plots a confusion matrix after every 10th validation epoch.
 
     To setup the callback:
-    The following import must be present:
-        import numpy as np
-        import torch
-        import matplotlib.pyplot as plt
-        import seaborn as sns
-        from pytorch_lightning.callbacks import Callback
-        from torchmetrics import ConfusionMatrix
 
     For each step (train/val/test) the following must be present in the model's init (n is the number of classes):
         self.train_cm =  ConfusionMatrix(num_classes = n) #for plotting after training epochs
@@ -130,15 +123,9 @@ class EmbeddingPlotterCallback(Callback):
     By default it plots 2D and 3D after every 10th validation epoch.
 
     To setup the callback: 
-    
-    The following imports must be present:
-        import numpy as np
-        import torch
-        from pytorch_lightning.callbacks import Callback
-        import plotly.express as px
 
     The following must be present in the model's init (n is the dimension of the embeddings):
-        self.storage = torch.zeros(1, n + 1).to(device = 'cpu') #where dev is the device the training is being done on
+        self.storage = torch.zeros(1, n + 1).to(device = 'cpu') 
 
     In each step definition (train/val/test) the folowing must be present after calculting the embeddings:
         #labels is your target, embs is the tensor containing the embeddings
