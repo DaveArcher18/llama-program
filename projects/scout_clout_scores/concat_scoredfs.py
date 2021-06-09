@@ -11,18 +11,18 @@ def make_zeros(n):
         zero_list.append(0)
     return zero_list    
 
-def make_dfs(dir, foldername): 
+def make_dfs(directory, foldername): 
     """
-    Takes a directory containing csvs (dir) and a name for an output folder and places 2 csvs in the output folder.
+    Takes a directory containing csvs (directory) and a name for an output folder and places 2 csvs in the output folder.
     First the function concatenates all the dfs recording the users' scores over time. The second csv contains some summary
     statistics regarding each user.
     """
-    filenames = os.listdir(dir)
+    filenames = os.listdir(directory)
     user_scores_over_time = {}
 
     for j in range(len(filenames)):
         #reads in each csv
-        spreadsheet = pd.read_csv(os.path.join(dir, filenames[j]))
+        spreadsheet = pd.read_csv(os.path.join(directory, filenames[j]))
 
         for i in range(len(spreadsheet)):
             #checks if the user has appeared before - if not it appends zeros to their score vector
@@ -53,7 +53,6 @@ def make_dfs(dir, foldername):
         data.append([scores_df.columns[i], round(np.mean(np.array(scores_df[scores_df.columns[i]])), 2), round(np.std(np.array(scores_df[scores_df.columns[i]])), 2), list(scores_df[scores_df.columns[i]])[0] - list(scores_df[scores_df.columns[i]])[-1]])
 
     summary_statistics_df = pd.DataFrame(data, columns = ['username', 'mean_score', 'std_score' ,'score_change'])
-    print(summary_statistics_df)
     summary_statistics_df.to_csv(os.path.join(foldername, 'summary_statistics_spreadsheet.csv'))
 
 make_dfs('scout_signups_clean', 'ScoutSummaries')
