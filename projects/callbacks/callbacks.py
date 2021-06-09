@@ -17,14 +17,6 @@ class ConfusionMatrixCallback(Callback):
     By default it plots a confusion matrix after every 10th validation epoch.
 
     To setup the callback:
-    The following import must be present:
-        import numpy as np
-        import torch
-        import matplotlib.pyplot as plt
-        import seaborn as sns
-        from pytorch_lightning.callbacks import Callback
-        from torchmetrics import ConfusionMatrix
-
     For each step (train/val/test) the following must be present in the model's init (n is the number of classes):
         self.train_cm =  ConfusionMatrix(num_classes = n) #for plotting after training epochs
         self.val_cm =  ConfusionMatrix(num_classes = n) #for plotting after validation epochs
@@ -43,9 +35,6 @@ Arguments:
 
     test (bool, default = False)                    If set to True a confusion matrix will be plotted after every n_epochs testing epochs
     
-    division (bool, default = False)                If set to True the plotted confusion matrix will be divided by its sum, resulting in percentages
-                                                    instead of counts appearing in the plot
-
     n_epochs (int, default = 10)                    A plot will be produced every n_epochs
 
     title (str, default = None)                     Allows the user to set a main title for all the plots
@@ -53,8 +42,7 @@ Arguments:
     labels (list of strings, default = None)        Allows the user to input the category names in order to labels the x and y axes of the plots.
     
     '''
-    def __init__(self, train = False, val = True, test = False, division = False, n_epochs = 10, title = None, labels = None):
-        self.division = division
+    def __init__(self, train = False, val = True, test = False,  n_epochs = 10, title = None, labels = None):
         self.n_epochs = n_epochs
         self.title = title
         self.train = train      
@@ -68,7 +56,7 @@ Arguments:
         '''This funtion plots the confusion matrix in accordance with the above arguments '''
         
         cf_matrix = cf_matrix.cpu().numpy()
-
+        
         fig, ax = plt.subplots(figsize=(12, 12))
         
         ax.set_xlabel("Predicted")
@@ -81,14 +69,20 @@ Arguments:
         if self.labels:
             ax.set_xticklabels(self.labels)
             ax.set_yticklabels(self.labels)
-            
-        if self.division:
-            sns.heatmap(cf_matrix/np.sum(cf_matrix), annot=True, 
-            fmt='.2%', cmap='Blues', ax = ax)
-            
-        else:
-            sns.heatmap(cf_matrix, annot=True, 
-            cmap='Blues', ax = ax)
+
+        
+        group_counts = ['{0:0.0f}'.format(value) for value in cf_matrix.flatten()]
+
+        group_totals = ['{0:0.0f}'.format(value) for value in np.repeat(np.transpose(cf_matrix.sum(axis=1)), cf_matrix.shape[0]).flatten()]
+        
+        group_percentages = ['{0:.2%}'.format(value) for value in cf_matrix.flatten()/np.sum(cf_matrix).flatten()]
+        
+        
+        anots = [f'{v1}/{v2} \n{v3}' for v1, v2, v3 in zip(group_counts, group_totals, group_percentages)]
+        
+        anots = np.asarray(anots).reshape(cf_matrix.shape[0], cf_matrix.shape[0])
+        
+        sns.heatmap(cf_matrix/np.transpose(cf_matrix.sum(axis=1)), annot=anots, fmt='', cmap='Blues', ax = ax)
        
         plt.show()
             
@@ -121,6 +115,8 @@ Arguments:
     def on_test_epoch_end(trainer, pl_module):
         if self.test and pl_module.current_epoch % self.n_epochs == 0:
             self._plot_confusion_matrix(pl_module.test_cm.compute(), step_title = f'After Test epoch {pl_module.current_epoch}')
+      
+    
 
 
 
