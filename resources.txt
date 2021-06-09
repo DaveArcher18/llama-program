@@ -1,0 +1,34 @@
+Animals with attributes 2 (for evaluation)
+https://cvml.ist.ac.at/AwA2/
+
+Clip Paper
+https://arxiv.org/pdf/2103.00020.pdf
+https://github.com/openai/CLIP
+
+The empirical results and heuristics seems to agree with regard to the fact 
+that a more specific (richer) label performs better than a less specific labels:
+so 'a photo of a dog running' is a better label than 'dog'. 
+
+Specifically, adding the label's superceding class also increases accuracy:
+'dog' vs 'dog, pet' or 'dog, animal'
+
+Hypothesis: Simply adding more desciptive words to the labels will improve accuray, potentially leveraging some kind
+of pretrained image to text architecture 
+
+The process of algorithmically lengthening labels in some sort of consistent way that 
+preserves information should be investigated 
+
+The idea of ensembling labels has been mentioned in this paper - this is definitely 
+something that should be investigated in some sort of algorithmic way. 
+
+^^ Pg 7 and 8 in the clip paper
+
+It appears to be the case that ZSL is particularly difficult to implement accurately when it comes to highly complex and or
+specific tasks (which seems very reasonanle)
+Interstingly enough - in some cases zero shot performs better than few shot learning pg 9 right ^
+
+
+
+
+
+
