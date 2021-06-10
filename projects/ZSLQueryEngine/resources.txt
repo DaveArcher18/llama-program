@@ -27,3 +27,12 @@ It appears to be the case that ZSL is particularly difficult to implement accura
 specific tasks (which seems very reasonanle)
 Interstingly enough - in some cases zero shot performs better than few shot learning pg 9 right ^
 
+
+"As in the preceding visual, we find that repeating the caption with alternative phrasing improves the consistency of the results."
+"While DALL·E does offer some level of controllability over the attributes and positions of a small number of objects, the success rate can depend on how the caption is phrased."
+from 
+https://openai.com/blog/dall-e/
+
+
+
+
