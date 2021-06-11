@@ -3,3 +3,5 @@ projects/scout_clout_scores/wtw_signups_clean
 
 *.csv
 
+*.pdf
+
