@@ -17,6 +17,7 @@ class ConfusionMatrixCallback(Callback):
     By default it plots a confusion matrix after every 10th validation epoch.
 
     To setup the callback:
+
     For each step (train/val/test) the following must be present in the model's init (n is the number of classes):
         self.train_cm =  ConfusionMatrix(num_classes = n) #for plotting after training epochs
         self.val_cm =  ConfusionMatrix(num_classes = n) #for plotting after validation epochs
@@ -125,22 +126,26 @@ class EmbeddingPlotterCallback(Callback):
     Callback to plot embeddings every n_epochs at the end of the train/validation/test epoch. 
     By default it plots 2D and 3D after every 10th validation epoch.
 
-    To setup the callback: 
-    
-    The following imports must be present:
-        import numpy as np
-        import torch
-        from pytorch_lightning.callbacks import Callback
-        import plotly.express as px
+    To setup the callback (with labelled data): 
 
     The following must be present in the model's init (n is the dimension of the embeddings):
-        self.storage = torch.zeros(1, n + 1).to(device = 'cpu') #where dev is the device the training is being done on
+        self.storage = torch.zeros(1, n + 1).to(device = 'cpu') 
 
     In each step definition (train/val/test) the folowing must be present after calculting the embeddings:
         #labels is your target, embs is the tensor containing the embeddings
         
         new_storage = torch.cat((embs.to('cpu'), torch.transpose(labels.unsqueeze(0), 0, 1).to('cpu')), 1)
         self.storage = torch.cat((self.storage, new_storage), 0)
+
+    To setup the callback (with unlabelled data):
+    
+    The following must be present in the model's init (n is the dimension of the embeddings):
+        self.storage = torch.zeros(1, n).to(device = 'cpu') 
+    
+    In each step definition (train/val/test) the folowing must be present after calculting the embeddings:
+        #embs is the tensor containing the embeddings
+        self.storage = torch.cat((self.storage, embs.to('cpu')), 0)    
+        
 
     Arguments:
     train (bool, default = False)                   If set to True embeddings will be plotted after every n_epochs training epochs
@@ -155,62 +160,97 @@ class EmbeddingPlotterCallback(Callback):
 
     n_epochs (int, default = 10)                    Plot will be produced every n_epochs
 
+    labeled (bool, default = True)                  If true the callback will expect the data to be labelled, else the callback 
+                                                    will expect the embeddings to be unlabeled   
+
     labels (list, default = None)                   Labels expects an ordered list of the class names (so the first entry corresponds to 
                                                     the label 0, etc). If passed the plot will distunguish the embeddings by string label
                                                     instead of by int label (makes the plot much better).
     """ 
-    def __init__(self, train = False, val = True, test = False, dim_2 = True, dim_3 = True,  n_epochs = 10, labels = None):
+    def __init__(self, train = False, val = True, test = False, dim_2 = True, dim_3 = True,  n_epochs = 10, labeled = True, labels = None):
         self.train = train      
         self.val = val
         self.test = test
         self.dim_2 = dim_2
         self.dim_3 = dim_3
         self.n_epochs = n_epochs
+        self.labeled = labeled
         self.labels = labels
         
         
     def _plot_embeddings(self, storage, step_title):
-        embs, targets = self._unpack_storage(storage)
-        
-        # 2D case:
-        if self.dim_2:
-            pca2 = PCA(n_components=2)
+        if self.labeled:
+            embs, targets = self._unpack_storage(storage)
+            
+            # 2D case:
+            if self.dim_2:
+                pca2 = PCA(n_components=2)
 
-            reduced_embs_2 = pca2.fit_transform(embs)
+                reduced_embs_2 = pca2.fit_transform(embs)
 
-            xs = reduced_embs_2[:,0]
-            ys = reduced_embs_2[:,1] 
+                xs = reduced_embs_2[:,0]
+                ys = reduced_embs_2[:,1] 
 
-            fig = px.scatter(x = xs, y = ys, color = targets, title = '2D '+ step_title)
-            fig.show()
-        
-        # 3D case:
-        if self.dim_3:
-            pca3 = PCA(n_components=3)
-            reduced_embs_3 = pca3.fit_transform(embs)
+                fig = px.scatter(x = xs, y = ys, color = targets, title = '2D '+ step_title)
+                fig.show()
+            
+            # 3D case:
+            if self.dim_3:
+                pca3 = PCA(n_components=3)
+                reduced_embs_3 = pca3.fit_transform(embs)
 
-            xs = reduced_embs_3[:,0]
-            ys = reduced_embs_3[:,1]
-            zs = reduced_embs_3[:,2] 
+                xs = reduced_embs_3[:,0]
+                ys = reduced_embs_3[:,1]
+                zs = reduced_embs_3[:,2] 
 
-            fig = px.scatter_3d(x = xs, y = ys, z = zs, color = targets, title = '3D ' + step_title)
-            fig.show()
+                fig = px.scatter_3d(x = xs, y = ys, z = zs, color = targets, title = '3D ' + step_title)
+                fig.show()
+        else:
+            embs = self._unpack_storage(storage)
+                        # 2D case:
+            if self.dim_2:
+                pca2 = PCA(n_components=2)
+
+                reduced_embs_2 = pca2.fit_transform(embs)
+
+                xs = reduced_embs_2[:,0]
+                ys = reduced_embs_2[:,1] 
+
+                fig = px.scatter(x = xs, y = ys, title = '2D '+ step_title)
+                fig.show()
+            
+            # 3D case:
+            if self.dim_3:
+                pca3 = PCA(n_components=3)
+                reduced_embs_3 = pca3.fit_transform(embs)
+
+                xs = reduced_embs_3[:,0]
+                ys = reduced_embs_3[:,1]
+                zs = reduced_embs_3[:,2] 
+
+                fig = px.scatter_3d(x = xs, y = ys, z = zs, title = '3D ' + step_title)
+                fig.show()         
       
     
     def _unpack_storage(self, storage):
-        if self.labels:
-            storage = storage[1:].detach().numpy()
-            embs = storage[:,0:-1]
-            targets = storage[:, -1]
-            target_labels = []
+        if self.labeled:
+            if self.labels:
+                storage = storage[1:].detach().numpy()
+                embs = storage[:,0:-1]
+                targets = storage[:, -1]
+                target_labels = []
 
-            for i in targets:
-                target_labels.append(self.labels[int(i)])
-            return embs, target_labels    
-        
+                for i in targets:
+                    target_labels.append(self.labels[int(i)])
+                return embs, target_labels    
+            
+            else:
+                storage = storage[1:].cpu().detach().numpy()
+                return storage[:,0:-1], storage[:, -1]
         else:
-            storage = storage[1:].cpu().detach().numpy()
-            return storage[:,0:-1], storage[:, -1]
+            embs = storage[1:].detach().numpy()
+            return embs
+
         
         
     def on_train_epoch_start(self, trainer, pl_module):
