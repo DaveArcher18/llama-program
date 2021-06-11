@@ -11,7 +11,7 @@ def make_zeros(n):
         zero_list.append(0)
     return zero_list    
 
-def make_dfs(directory, foldername): 
+def make_scores_df(directory): 
     """
     Takes a directory containing csvs (directory) and a name for an output folder and places 2 csvs in the output folder.
     First the function concatenates all the dfs recording the users' scores over time. The second csv contains some summary
@@ -39,25 +39,33 @@ def make_dfs(directory, foldername):
 
 
     scores_df = pd.DataFrame.from_dict(user_scores_over_time)
-
+    return scores_df
     #makes a folder
+    
+def make_csv(df, foldername, filename):   
     if foldername not in os.listdir('.'):
         os.mkdir(foldername)
 
+    df.to_csv(os.path.join(foldername, filename))
 
-    scores_df.to_csv(os.path.join(foldername, 'user_scores_spreadsheet.csv'))
 
+def make_summaries(df):
 
-    data = [[scores_df.columns[0], round(np.mean(np.array(scores_df[scores_df.columns[0]])), 2), round(np.std(np.array(scores_df[scores_df.columns[0]])), 2), list(scores_df[scores_df.columns[0]])[0] - list(scores_df[scores_df.columns[0]])[-1]]]
-    for i in range(1, len(scores_df.columns)):
-        data.append([scores_df.columns[i], round(np.mean(np.array(scores_df[scores_df.columns[i]])), 2), round(np.std(np.array(scores_df[scores_df.columns[i]])), 2), list(scores_df[scores_df.columns[i]])[0] - list(scores_df[scores_df.columns[i]])[-1]])
+    data = [[df.columns[0], round(np.mean(np.array(df[df.columns[0]])), 2), round(np.std(np.array(df[scores_df.columns[0]])), 2), list(df[df.columns[0]])[0] - list(df[df.columns[0]])[-1]]]
+    for i in range(1, len(df.columns)):
+        data.append([df.columns[i], round(np.mean(np.array(df[df.columns[i]])), 2), round(np.std(np.array(df[df.columns[i]])), 2), list(df[df.columns[i]])[0] - list(df[df.columns[i]])[-1]])
 
     summary_statistics_df = pd.DataFrame(data, columns = ['username', 'mean_score', 'std_score' ,'score_change'])
     summary_statistics_df.to_csv(os.path.join(foldername, 'summary_statistics_spreadsheet.csv'))
+    return 
 
-make_dfs('scout_signups_clean', 'ScoutSummaries')
 
-make_dfs('wtw_signups_clean', 'WTWSummaries')
+scout = make_scores_df('scout_signups_clean')
+#make_csv(scout , 'ScoutSummaries')
+
+
+wtw = make_scores_df('wtw_signups_clean')
+#make_csv(make_dfs(wtw), 'WTWSummaries')
 
 
 
