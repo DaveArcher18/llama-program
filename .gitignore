@@ -1,0 +1,7 @@
+projects/scout_clout_scores/scout_signups_clean
+projects/scout_clout_scores/wtw_signups_clean
+
+*.csv
+
+*.pdf
+
