@@ -1,6 +1,10 @@
 Animals with attributes 2 (for evaluation)
 https://cvml.ist.ac.at/AwA2/
 
+Clip Blogpost 
+https://openai.com/blog/clip/
+Nice examples of prompt engineering here, such as add 'a type of food' onto the end of the labels of food items.
+
 Clip Paper
 https://arxiv.org/pdf/2103.00020.pdf
 https://github.com/openai/CLIP
