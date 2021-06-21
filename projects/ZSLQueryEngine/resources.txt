@@ -37,6 +37,12 @@ Interstingly enough - in some cases zero shot performs better than few shot lear
 from 
 https://openai.com/blog/dall-e/
 
+https://www.youtube.com/watch?v=2ltOaInDD-s
+Minute 15ish 
+Consider teaching GPT-3 to classify words as their object type (eg : avocado ~ type of food) 
+The overall plan for this idea will be to train a trnasformer to take a word and return its 
+object category, such as 'fruit' or 'vegetable' or 'vehicle' or things of this nature in order 
+to provide more context to CLIP's own transformer when processing the label.
 
 
 
