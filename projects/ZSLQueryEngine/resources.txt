@@ -44,5 +44,10 @@ The overall plan for this idea will be to train a trnasformer to take a word and
 object category, such as 'fruit' or 'vegetable' or 'vehicle' or things of this nature in order 
 to provide more context to CLIP's own transformer when processing the label.
 
+https://blog.roboflow.com/how-to-use-openai-clip/
+There is a necessity for good prompt engineering (not much else was said).
+
+
+
 
 
