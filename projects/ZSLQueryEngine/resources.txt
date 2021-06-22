@@ -47,7 +47,10 @@ to provide more context to CLIP's own transformer when processing the label.
 https://blog.roboflow.com/how-to-use-openai-clip/
 There is a necessity for good prompt engineering (not much else was said).
 
+https://medium.com/swlh/openai-gpt-3-and-prompt-engineering-dcdc2c5fcd29
+Fun article but nothing particularly useful
 
-
-
+https://blog.andrewcantino.com/blog/2021/04/21/prompt-engineering-tips-and-tricks/
+This article concerns controlling GPT-3's behaviour by prompting it. I think it is both interesting and useful
+but not for this project  
 
