@@ -1,0 +1,32 @@
+Title: An Automated approach to prompt engineering for the improved accuracy of Zero-Shot Classfiers
+
+Content: Modern zero-shot classifiers, such as OpenAI's CLIP are able to take an image, a set of prompts and return a similarity
+score of each prompt with respect to the image. The hypothesis of this paper is that 'richer' prompts will improve the 
+accuracy of modern zero-shot classifiers. The intuitive justification of this hypothesis is quite simple: the more an entity 
+knows about an object the more likely the aforementioned entity will be able to understand the object in a greater context 
+that also contains other objects. The intention of this paper will be to justify the above hypothesis experimentally and to 
+provide a method to 'enrich' prompts with the intention of improving the accuracy of modern zero-shot classifiers. 
+
+Idea: (A) The first idea that will be investigated is the notion that given a label 'x', an imrpovement of this label would be:
+f'x, a type of {object category of x}'. In this case the problem that must be solved is the production of the object category 
+of the label. This is reliant upon the idea that all objects inherit properties from some overarching class of objects and that 
+transformers are able to percieve these properties. 
+
+Method: The model CLIP by OpenAI will be used for all experiments in this paper. In all cases (unless stated otherwise) the 
+resnet50 image feature extractor will be used for image feature extraction. 
+
+Justify Hypothesis Experimentally: Various examples will be hand picked in order to demonstrate that there are cases in which the hypothesis 
+holds. The initial experiments will attempt to show that labels produced using (A) are more effective than just the labels themselves.
+
+Provide A Method: If the experiments regarding (A) show an increase in performance then an implementation of (A) will be constructed.
+A semi-exhaustive list of object categories will need to be produced (or found) and then a transformer will be used to produce a map 
+from the label to its overarching category. This could involve fine-tuning a natural language classifier, or using Hugging Face's 
+zero-shot-classification pipeline.
+
+
+
+
+
+
+
+
