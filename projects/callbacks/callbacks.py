@@ -110,12 +110,12 @@ Arguments:
             self._plot_confusion_matrix(pl_module.val_cm.compute(), step_title = f'After Validation epoch {pl_module.current_epoch}')
     
     
-    def on_test_epoch_end(trainer, pl_module):
+    def on_test_epoch_end(self, trainer, pl_module):
         if self.test and pl_module.current_epoch % self.n_epochs == 0:
                 pl_module.test_cm.reset()
        #zeros the confusion matrix so it can be repopulated by only this testing epoch
     
-    def on_test_epoch_end(trainer, pl_module):
+    def on_test_epoch_end(self, trainer, pl_module):
         if self.test and pl_module.current_epoch % self.n_epochs == 0:
             self._plot_confusion_matrix(pl_module.test_cm.compute(), step_title = f'After Test epoch {pl_module.current_epoch}')
       
