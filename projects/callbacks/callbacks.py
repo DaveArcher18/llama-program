@@ -51,6 +51,8 @@ Arguments:
         self.test = test
         if labels:
             self.labels = labels
+        else: 
+            self.labels = None    
         
     
     def _plot_confusion_matrix(self, cf_matrix, step_title):
