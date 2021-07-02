@@ -62,6 +62,18 @@ Arguments:
         
         fig, ax = plt.subplots(figsize=(12, 12))
         
+        group_counts = ['{0:0.0f}'.format(value) for value in cf_matrix.flatten()]
+
+        group_totals = ['{0:0.0f}'.format(value) for value in np.repeat(np.transpose(cf_matrix.sum(axis=1)), cf_matrix.shape[0]).flatten()]
+        
+        group_percentages = ['{0:.2%}'.format(value) for value in cf_matrix.flatten()/np.sum(cf_matrix).flatten()]
+        
+        anots = [f'{v1}/{v2} \n{v3}' for v1, v2, v3 in zip(group_counts, group_totals, group_percentages)]
+        
+        anots = np.asarray(anots).reshape(cf_matrix.shape[0], cf_matrix.shape[0])
+        
+        sns.heatmap(cf_matrix/np.transpose(cf_matrix.sum(axis=1)), annot=anots, fmt='', cmap='Blues', ax = ax)
+        
         ax.set_xlabel("Predicted")
         ax.set_ylabel("True Value")
         plt.suptitle(step_title)
@@ -72,20 +84,6 @@ Arguments:
         if self.labels:
             ax.set_xticklabels(self.labels)
             ax.set_yticklabels(self.labels)
-
-        
-        group_counts = ['{0:0.0f}'.format(value) for value in cf_matrix.flatten()]
-
-        group_totals = ['{0:0.0f}'.format(value) for value in np.repeat(np.transpose(cf_matrix.sum(axis=1)), cf_matrix.shape[0]).flatten()]
-        
-        group_percentages = ['{0:.2%}'.format(value) for value in cf_matrix.flatten()/np.sum(cf_matrix).flatten()]
-        
-        
-        anots = [f'{v1}/{v2} \n{v3}' for v1, v2, v3 in zip(group_counts, group_totals, group_percentages)]
-        
-        anots = np.asarray(anots).reshape(cf_matrix.shape[0], cf_matrix.shape[0])
-        
-        sns.heatmap(cf_matrix/np.transpose(cf_matrix.sum(axis=1)), annot=anots, fmt='', cmap='Blues', ax = ax)
        
         plt.show()
             
