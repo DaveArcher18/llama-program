@@ -1,0 +1,5 @@
+The purpose of this project is to investigate the performance of the FTTransformer as described in the paper: Revisiting Deep Learning Models for Tabular Data
+(https://arxiv.org/pdf/2106.11959.pdf)
+
+Thus far I have applied it in the July 2021 tabular playground on Kaggle. It seems to perform quite well with no adjustments to the 
+specific dataset.
