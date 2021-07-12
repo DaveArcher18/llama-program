@@ -54,3 +54,27 @@ https://blog.andrewcantino.com/blog/2021/04/21/prompt-engineering-tips-and-trick
 This article concerns controlling GPT-3's behaviour by prompting it. I think it is both interesting and useful
 but not for this project  
 
+https://thegradient.pub/prompting/
+Contains a large overview of what has already been done with prompt engineering of small, medium and large 
+transformer. It overviews discrete prompting, Autoprompt, soft prompting and provides papers that discuss these ideas. 
+The papers will be investigated and summarised below.
+
+AUTOPROMPT: Eliciting Knowledge from Language Models with Automatically Generated Prompts
+https://arxiv.org/pdf/2010.15980.pdf
+https://github.com/ucinlp/autoprompt
+This paper proposes a gradient based automatic prompt production for transformers. 
+It is applicable to language tasks in a supervised context and is potentially useful to improve 
+CLIP performance by enriching the image labels provided.  
+
+The Power of Scale for Parameter-Efficient Prompt Tuning
+https://arxiv.org/pdf/2104.08691.pdf
+This paper proposes prependeding a parameterised vector to each model input. Instead of finetuning all the weights one can just 
+finetune this prepended vector. They have shown this to be quite competative with finetuning but with a few advantages (less compute,
+multiple tasks only require one big model)
+
+Making Pre-trained Language Models Better Few-shot Learners
+https://arxiv.org/pdf/2012.15723.pdf
+This paper proposes multiple simple methods to improve few shot performance and builds on the work of AUTOPROMPT
+They a bunch of very cool engineering ideas to solve some of their problems
+
+
