@@ -1,0 +1,38 @@
+Justification for prompt engineering in general: 
+- It can be difficult to probe transformers to see what they have / what they have learned. This appears to be 
+particularly relevant for large transformer.
+- Framing tasks as masked language modelling and incorporating prompts has been see to be competative with finetuning 
+the same model on the task (while being vastly cheaper in computative terms). (Shin et al., 2020)
+- This approach is much more effective in data poor environments (where finetuning can suffer from instability)
+"for example, a simple binary classification task will
+introduce 2,048 new parameters for a RoBERTalarge model—making it challenging to learn from a
+small amount of annotated data" (Gao T et al., 2021)
+- In the case where one wants to perform multiple language tasks instead of finetuning multiple instances of the same 
+model one could just change the prompt (this saves storage space and computative resources)
+- In the event one does not want to adjust model parameters (for any reason) prompt engineering is a competative 
+alternative
+- In CLIP's training set it is "Usually the text is a full sentence describing the image in some way." (Radford A et al., 2021)
+Thus prompting is extremely useful for CLIP as it expects to be given sentences as labels.
+
+
+Justification for ruling out BOW and TF-IDF based methods:
+- These methods rely on having encodings for all possible text labels, 
+or retraining and reproducing the encodings each time a new text label is introduced.
+- These methods require a large dataset and thus would be hugely subject to my biases
+
+Justification for ruling out LSTM:
+- much more difficult than transformers to do transfer learning (since their learned embeddings are task specific)
+- thus a large dataset would be required
+- if transfer learning was viable then the models trained on a dataset like the wikipedia corpus could be used
+
+What was CLIP Trained on (and what was it not trained on):
+- The dataset is composed of image and text pairs 
+- The data was produced by web searches (using queries)
+- In terms of scale: 5000000 queries were done 
+- These queries are largely wikipeida based : 'The base query list is all words occurring at least 100 times in
+the English version of Wikipedia. This is augmented with bi-grams with high pointwise mutual information as well as the 
+names of all Wikipedia articles above a certain search volume. Finally all WordNet synsets not already in the query list are added.'
+- From Imagenet paper on page 5: "We collect candidate images from the Internet by querying several image search engines." 
+(https://www.researchgate.net/publication/221361415_ImageNet_a_Large-Scale_Hierarchical_Image_Database) It thus cannot be 
+concluded that Imagenet images are not at least partially present in CLIP's training set.
+

@@ -24,20 +24,6 @@ from the label to its overarching category. This could involve fine-tuning a nat
 zero-shot-classification pipeline.
 
 
-Justification for prompt engineering in general: 
-- It can be difficult to probe transformers to see what they have / what they have learned. This appears to be 
-particularly relevant for large transformer.
-- Framing tasks as masked language modelling and incorporating prompts has been see to be competative with finetuning 
-the same model on the task (while being vastly cheaper in computative terms). (Shin et al., 2020)
-- This approach is much more effective in data poor environments (where finetuning can suffer from instability)
-"for example, a simple binary classification task will
-introduce 2,048 new parameters for a RoBERTalarge model—making it challenging to learn from a
-small amount of annotated data" (Gao T et al., 2021)
-- In the case where one wants to perform multiple language tasks instead of finetuning multiple instances of the same 
-model one could just change the prompt (this saves storage space and computative resources)
-- In the event one does not want to adjust model parameters (for any reason) prompt engineering is a competative 
-alternative
-
 
 
 
