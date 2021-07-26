@@ -239,12 +239,29 @@ futons,furniture
 stools,furniture
 nightstands,furniture
 mini-bars,furniture
-church,holy place
-shul,holy place
-synagogue,holy place
-mosque,holy place
-temple,holy place
-cathedral,holy place
+man,human
+woman,human
+person,human
+trombone,instrument
+saxophone,instrument
+trumpet,instrument
+tuba,instrument
+french horn,instrument
+record,instrument
+clarinet,instrument
+microphone,instrument
+harp,instrument
+recorder,instrument
+xylophone,instrument
+harmonica,instrument
+accordion,instrument
+banjo,instrument
+double bass,instrument
+cello,instrument
+violin,instrument
+piano,instrument
+guitar,instrument
+drum,instrument
 fork,kitchen 
 knife,kitchen 
 spoon,kitchen 
@@ -253,26 +270,6 @@ drinking straw,kitchen
 bowl,kitchen 
 plate,kitchen 
 sideplate,kitchen 
-trombone,musical intrument
-saxophone,musical intrument
-trumpet,musical intrument
-tuba,musical intrument
-french horn,musical intrument
-record,musical intrument
-clarinet,musical intrument
-microphone,musical intrument
-harp,musical intrument
-recorder,musical intrument
-xylophone,musical intrument
-harmonica,musical intrument
-accordion,musical intrument
-banjo,musical intrument
-double bass,musical intrument
-cello,musical intrument
-violin,musical intrument
-piano,musical intrument
-guitar,musical intrument
-drum,musical intrument
 Wildflower,plant
 Thistle,plant
 Flower,plant
@@ -290,25 +287,40 @@ Grass,plant
 Palm tree,plant
 Bush,plant
 Corn,plant
+fruit,plant
+vegetable,plant
 Tree,plant
-surfboard,sports equipment
-skateboard,sports equipment
-rollerskates,sports equipment
-iceskates,sports equipment
-skis,sports equipment
-football boots,sports equipment
-cricket spikes,sports equipment
-golf shoes,sports equipment
-track spikes,sports equipment
-football helmet,sports equipment
-jock strap,sports equipment
-mouthguards,sports equipment
-shin pads,sports equipment
-ski suits,sports equipment
-elbow pads,sports equipment
-shoulder pads,sports equipment
-bicycle helmet,sports equipment
-sports gloves,sports equipment
+surfboard,sport
+skateboard,sport
+rollerskates,sport
+iceskates,sport
+skis,sport
+football boots,sport
+cricket spikes,sport
+golf shoes,sport
+track spikes,sport
+football helmet,sport
+jock strap,sport
+mouthguards,sport
+shin pads,sport
+ski suits,sport
+elbow pads,sport
+shoulder pads,sport
+bicycle helmet,sport
+soccer,sport
+basketball,sport
+hockey,sport
+football,sport
+cricket,sport
+baseball,sport
+rubgy,sport
+sports gloves,sport
+church,temple
+shul,temple
+synagogue,temple
+mosque,temple
+temple,temple
+cathedral,temple
 saw,tool
 hammer,tool
 cultivator,tool
