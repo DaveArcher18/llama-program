@@ -1,0 +1,415 @@
+Object Name,Object Category
+antelope,animal
+bat,animal
+beaver,animal
+blue whale,animal
+bobcat,animal
+buffalo,animal
+chihuahua,animal
+chimpanzee,animal
+collie,animal
+cow,animal
+dalmatian,animal
+deer,animal
+dolphin,animal
+elephant,animal
+fox,animal
+german shepherd,animal
+giant panda,animal
+giraffe,animal
+gorilla,animal
+grizzly bear,animal
+hamster,animal
+hippopotamus,animal
+horse,animal
+humpback whale,animal
+killer whale,animal
+leopard,animal
+lion,animal
+mole,animal
+moose,animal
+mouse,animal
+otter,animal
+ox,animal
+persian cat,animal
+pig,animal
+polar bear,animal
+rabbit,animal
+raccoon,animal
+rat,animal
+rhinoceros,animal
+seal,animal
+sheep,animal
+siamese cat,animal
+skunk,animal
+spider monkey,animal
+squirrel,animal
+tiger,animal
+walrus,animal
+weasel,animal
+wolf,animal
+zebra,animal
+mobile phone,appliance
+smartphone,appliance
+wearable device,appliance
+television,appliance
+tv,appliance
+laptops,appliance
+printer,appliance
+monitor,appliance
+tablet,appliance
+computer,appliance
+scanner,appliance
+phone,appliance
+air conditioning,appliance
+air fryer,appliance
+blender,appliance
+clothes dryer,appliance
+clothes iron,appliance
+coffee maker,appliance
+dehumidifier,appliance
+dishwasher,appliance
+deep fryer,appliance
+electric blanket,appliance
+electric drill,appliance
+electric knife,appliance
+electric water boiler,appliance
+electric heater,appliance
+electric shaver,appliance
+toothbrush,appliance
+food processor,appliance
+garbage disposer,appliance
+fan,appliance
+fan heater,appliance
+freezer,appliance
+hair dryer,appliance
+hair iron,appliance
+humidifier,appliance
+icemaker,appliance
+ice cream maker,appliance
+juicer,appliance
+oven,appliance
+microwave oven,appliance
+refrigerator,appliance
+sewing machine,appliance
+slow cooker,appliance
+stove,appliance
+toaster,appliance
+vacuum cleaner,appliance
+waffle iron,appliance
+water dispenser,appliance
+washing machine,appliance
+sunglasses,clothing
+apron,clothing
+necklace,clothing
+watch,clothing
+tie,clothing
+bow tie,clothing
+purse,clothing
+earring,clothing
+jewelry,clothing
+ring,clothing
+gloves,clothing
+scarf,clothing
+umbrella,clothing
+mittens,clothing
+earmuffs,clothing
+hair clip,clothing
+bobby pin,clothing
+hair band,clothing
+pocket watch,clothing
+beanie,clothing
+cap,clothing
+beret,clothing
+straw hat,clothing
+derby hat,clothing
+top hat,clothing
+fanny pack,clothing
+waist bag,clothing
+backpack,clothing
+sweater,clothing
+dress,clothing
+hoodies,clothing
+t-shirt,clothing
+flip-flops,clothing
+shorts,clothing
+skirt,clothing
+jeans,clothing
+shoes,clothing
+coat,clothing
+high heels,clothing
+suit,clothing
+socks,clothing
+shirt,clothing
+bra,clothing
+swimsuit,clothing
+gloves,clothing
+jacket,clothing
+long coat,clothing
+boots,clothing
+polo shirt,clothing
+leather jackets,clothing
+fried chicken,food
+omelet,food
+pizza,food
+kebab,food
+fish,food
+steak,food
+salad,food
+pasta,food
+rice,food
+soup,food
+marmalade,food
+ham,food
+egg,food
+bread,food
+burrito,food
+hot chocolate,food
+bacon,food
+donut,food
+porridge,food
+muffin,food
+waffle,food
+croissant,food
+pancake,food
+toast,food
+sandwich,food
+yogurt,food
+cheese,food
+milk,food
+sausage,food
+orange juice,food
+breakfast cereal,food
+coffee,food
+sausage,food
+bread,food
+fish and chips,food
+pita,food
+hamburger,food
+french fries,food
+onion ring,food
+chicken nugget,food
+taco,food
+pizza,food
+hot dog,food
+ice cream,food
+apple,fruit
+watermelon,fruit
+orange,fruit
+pear,fruit
+cherry,fruit
+strawberry,fruit
+nectarine,fruit
+grape,fruit
+mango,fruit
+blueberry,fruit
+pomegranate,fruit
+starfruit,fruit
+carambola,fruit
+plum,fruit
+banana,fruit
+raspberry,fruit
+mandarin,fruit
+jackfruit,fruit
+papaya,fruit
+kiwi,fruit
+pineapple,fruit
+lime,fruit
+lemon,fruit
+apricot,fruit
+grapefruit,fruit
+melon,fruit
+coconut,fruit
+avocado,fruit
+peach,fruit
+tomato,fruit
+sofa,furniture
+table,furniture
+chair,furniture
+bed,furniture
+desk,furniture
+mattresse,furniture
+dresser,furniture
+ottoman,furniture
+dining table,furniture
+dining chair,furniture
+tv stand,furniture
+bookcases,furniture
+futons,furniture
+stools,furniture
+nightstands,furniture
+mini-bars,furniture
+church,holy place
+shul,holy place
+synagogue,holy place
+mosque,holy place
+temple,holy place
+cathedral,holy place
+fork,kitchen 
+knife,kitchen 
+spoon,kitchen 
+chopsticks,kitchen 
+drinking straw,kitchen 
+bowl,kitchen 
+plate,kitchen 
+sideplate,kitchen 
+trombone,musical intrument
+saxophone,musical intrument
+trumpet,musical intrument
+tuba,musical intrument
+french horn,musical intrument
+record,musical intrument
+clarinet,musical intrument
+microphone,musical intrument
+harp,musical intrument
+recorder,musical intrument
+xylophone,musical intrument
+harmonica,musical intrument
+accordion,musical intrument
+banjo,musical intrument
+double bass,musical intrument
+cello,musical intrument
+violin,musical intrument
+piano,musical intrument
+guitar,musical intrument
+drum,musical intrument
+Wildflower,plant
+Thistle,plant
+Flower,plant
+Herb,plant
+Mushroom,plant
+Weed,plant
+Fern,plant
+Cattail,plant
+Reed,plant
+Bamboo,plant
+Ivy,plant
+Shrub,plant
+Moss,plant
+Grass,plant
+Palm tree,plant
+Bush,plant
+Corn,plant
+Tree,plant
+surfboard,sports equipment
+skateboard,sports equipment
+rollerskates,sports equipment
+iceskates,sports equipment
+skis,sports equipment
+football boots,sports equipment
+cricket spikes,sports equipment
+golf shoes,sports equipment
+track spikes,sports equipment
+football helmet,sports equipment
+jock strap,sports equipment
+mouthguards,sports equipment
+shin pads,sports equipment
+ski suits,sports equipment
+elbow pads,sports equipment
+shoulder pads,sports equipment
+bicycle helmet,sports equipment
+sports gloves,sports equipment
+saw,tool
+hammer,tool
+cultivator,tool
+ladder,tool
+file,tool
+gloves,tool
+wheelbarrow,tool
+mallet,tool
+chisel,tool
+screwdriver,tool
+wrench,tool
+hand drill,tool
+level ax,tool
+pliers,tool
+clamp,tool
+bolt cutter,tool
+box cutter,tool
+shears,tool
+vise,tool
+nut,tool
+bolt,tool
+nail,tool
+screw,tool
+tape measure,tool
+shovel,tool
+allen key,tool
+chainsaw,tool
+heat gun,tool
+jackhammer,tool
+circular saw,tool
+nail gun,tool
+drill,tool
+sander,tool
+grinder,tool
+lathe,tool
+lawn mower,tool
+pneumatic torque wrench,tool
+table saw,tool
+asparagus,vegetable
+bean,vegetable
+beetroot,vegetable
+bok choy,vegetable
+pak choy,vegetable
+broccoli,vegetable
+brussels sprouts,vegetable
+butternut,vegetable
+cabbage,vegetable
+capsicum,vegetable
+carrot,vegetable
+cauliflower,vegetable
+celeriac,vegetable
+celery,vegetable
+chickpea,vegetable
+corn,vegetable
+cucumber,vegetable
+eggplant,vegetable
+brinjal,vegetable
+aubergine,vegetable
+fennel,vegetable
+lettuce,vegetable
+mushroom,vegetable
+onion,vegetable
+parsnip,vegetable
+peas,vegetable
+potato,vegetable
+pumpkin,vegetable
+radish,vegetable
+spinach,vegetable
+squash,vegetable
+swede,vegetable
+sweet potato,vegetable
+turnip,vegetable
+lentil,vegetable
+zucchini,vegetable
+courgette,vegetable
+van,vehicle
+taxi,vehicle
+car,vehicle
+bus,vehicle
+ambulance,vehicle
+skateboard,vehicle
+bicycle,vehicle
+mountain bike,vehicle
+scooter,vehicle
+motorcycle,vehicle
+fire engine,vehicle
+forklift,vehicle
+tractor,vehicle
+recycling truck,vehicle
+cement mixer,vehicle
+dump truck,vehicle
+subway,vehicle
+aerial tramway,vehicle
+helicopter,vehicle
+airplane,vehicle
+hot-air balloon,vehicle
+tram,vehicle
+streetcar,vehicle
+carriage,vehicle
+rowboat,vehicle
+boat,vehicle
+train,vehicle
+yacht,vehicle
+submarine,vehicle
