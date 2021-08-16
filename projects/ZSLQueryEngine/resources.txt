@@ -1,0 +1,80 @@
+Animals with attributes 2 (for evaluation)
+https://cvml.ist.ac.at/AwA2/
+
+Clip Blogpost 
+https://openai.com/blog/clip/
+Nice examples of prompt engineering here, such as add 'a type of food' onto the end of the labels of food items.
+
+Clip Paper
+https://arxiv.org/pdf/2103.00020.pdf
+https://github.com/openai/CLIP
+
+The empirical results and heuristics seems to agree with regard to the fact 
+that a more specific (richer) label performs better than a less specific labels:
+so 'a photo of a dog running' is a better label than 'dog'. 
+
+Specifically, adding the label's superceding class also increases accuracy:
+'dog' vs 'dog, pet' or 'dog, animal'
+
+Hypothesis: Simply adding more desciptive words to the labels will improve accuray, potentially leveraging some kind
+of pretrained image to text architecture 
+
+The process of algorithmically lengthening labels in some sort of consistent way that 
+preserves information should be investigated 
+
+The idea of ensembling labels has been mentioned in this paper - this is definitely 
+something that should be investigated in some sort of algorithmic way. 
+
+^^ Pg 7 and 8 in the clip paper
+
+It appears to be the case that ZSL is particularly difficult to implement accurately when it comes to highly complex and or
+specific tasks (which seems very reasonanle)
+Interstingly enough - in some cases zero shot performs better than few shot learning pg 9 right ^
+
+
+"As in the preceding visual, we find that repeating the caption with alternative phrasing improves the consistency of the results."
+"While DALL·E does offer some level of controllability over the attributes and positions of a small number of objects, the success rate can depend on how the caption is phrased."
+from 
+https://openai.com/blog/dall-e/
+
+https://www.youtube.com/watch?v=2ltOaInDD-s
+Minute 15ish 
+Consider teaching GPT-3 to classify words as their object type (eg : avocado ~ type of food) 
+The overall plan for this idea will be to train a trnasformer to take a word and return its 
+object category, such as 'fruit' or 'vegetable' or 'vehicle' or things of this nature in order 
+to provide more context to CLIP's own transformer when processing the label.
+
+https://blog.roboflow.com/how-to-use-openai-clip/
+There is a necessity for good prompt engineering (not much else was said).
+
+https://medium.com/swlh/openai-gpt-3-and-prompt-engineering-dcdc2c5fcd29
+Fun article but nothing particularly useful
+
+https://blog.andrewcantino.com/blog/2021/04/21/prompt-engineering-tips-and-tricks/
+This article concerns controlling GPT-3's behaviour by prompting it. I think it is both interesting and useful
+but not for this project  
+
+https://thegradient.pub/prompting/
+Contains a large overview of what has already been done with prompt engineering of small, medium and large 
+transformer. It overviews discrete prompting, Autoprompt, soft prompting and provides papers that discuss these ideas. 
+The papers will be investigated and summarised below.
+
+AUTOPROMPT: Eliciting Knowledge from Language Models with Automatically Generated Prompts
+https://arxiv.org/pdf/2010.15980.pdf
+https://github.com/ucinlp/autoprompt
+This paper proposes a gradient based automatic prompt production for transformers. 
+It is applicable to language tasks in a supervised context and is potentially useful to improve 
+CLIP performance by enriching the image labels provided.  
+
+The Power of Scale for Parameter-Efficient Prompt Tuning
+https://arxiv.org/pdf/2104.08691.pdf
+This paper proposes prependeding a parameterised vector to each model input. Instead of finetuning all the weights one can just 
+finetune this prepended vector. They have shown this to be quite competative with finetuning but with a few advantages (less compute,
+multiple tasks only require one big model)
+
+Making Pre-trained Language Models Better Few-shot Learners
+https://arxiv.org/pdf/2012.15723.pdf
+This paper proposes multiple simple methods to improve few shot performance and builds on the work of AUTOPROMPT
+They a bunch of very cool engineering ideas to solve some of their problems
+
+
